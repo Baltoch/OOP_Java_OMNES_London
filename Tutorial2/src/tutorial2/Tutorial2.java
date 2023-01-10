@@ -10,8 +10,8 @@ import java.util.Scanner;
  * @author balth
  */
 
-/**
- * @hidden
+/*
+ *
  * Write a program to read the salary from the user and determine how much tax someone should pay
  * according to the following rules: People pay no tax if they earn up to £10000. 
  * They pay tax at the rate of 20% on the amount they earn over £10000 but up to £50000. 
