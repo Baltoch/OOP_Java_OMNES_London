@@ -37,19 +37,31 @@ public class Tutorial3Q1 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        double interestRate, startingBalance;
+        double interestRate, startingBalance, withdrawals, deposits;
         long numberOfMonth;
         Scanner input = new Scanner(System.in);
         System.out.println("Enter the starting balance");
         startingBalance = input.nextDouble();
-        SavingsAccount account = new SavingsAccount();
+        System.out.println("Enter the annual interest rate");
+        interestRate = input.nextDouble();
+        SavingsAccount account = new SavingsAccount(startingBalance, interestRate);
+        System.out.println("Enter the number of months since the account as been established");
+        numberOfMonth = input.nextLong();
+        for(int i = 1; i <= numberOfMonth; i++)
+        {
+            System.out.println("Enter the amount deposited into the account during the month " + i);
+            account.deposit(input.nextDouble());
+            System.out.println("Enter the amount withdrawn from the account during the month " + i);
+            account.withdrawal(input.nextDouble());
+            account.addMonthlyRate();
+        }
     }
     
 }
 
 class SavingsAccount {
     private double annualInterestRate;
-    private double balance;
+    public double balance;
     public SavingsAccount(double startingBalance, double startingAnnualInterestRate) {
         balance = startingBalance;
         annualInterestRate = startingAnnualInterestRate;
