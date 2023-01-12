@@ -34,7 +34,7 @@ public class Tutorial2 {
         if(salary > 50000)
         {
             above50k = salary - 50000;
-            above10k = salary - 10000;
+            above10k = salary % 50000 - 10000;
         }
         else if(salary > 10000)
         {
