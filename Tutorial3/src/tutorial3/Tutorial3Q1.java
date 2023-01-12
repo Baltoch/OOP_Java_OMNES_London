@@ -37,7 +37,7 @@ public class Tutorial3Q1 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        double interestRate, startingBalance, withdrawals, deposits;
+        double interestRate, startingBalance, totalWithdrawals = 0, withdrawal, totalDeposits = 0, deposit;
         long numberOfMonth;
         Scanner input = new Scanner(System.in);
         System.out.println("Enter the starting balance");
@@ -50,10 +50,13 @@ public class Tutorial3Q1 {
         for(int i = 1; i <= numberOfMonth; i++)
         {
             System.out.println("Enter the amount deposited into the account during the month " + i);
-            account.deposit(input.nextDouble());
+            deposit = input.nextDouble();
+            account.deposit(deposit);
+            totalDeposits += deposit;
             System.out.println("Enter the amount withdrawn from the account during the month " + i);
-            account.withdrawal(input.nextDouble());
-            account.addMonthlyRate();
+            withdrawal = input.nextDouble();
+            account.withdrawal(withdrawal);
+            totalWithdrawals += withdrawal;
         }
     }
     
