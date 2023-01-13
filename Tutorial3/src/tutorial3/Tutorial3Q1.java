@@ -37,7 +37,7 @@ public class Tutorial3Q1 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        double interestRate, startingBalance, totalWithdrawals = 0, withdrawal, totalDeposits = 0, deposit;
+        double interestRate, totalInterest, startingBalance, totalWithdrawals = 0, withdrawal, totalDeposits = 0, deposit;
         long numberOfMonth;
         Scanner input = new Scanner(System.in);
         System.out.println("Enter the starting balance");
@@ -57,14 +57,21 @@ public class Tutorial3Q1 {
             withdrawal = input.nextDouble();
             account.withdrawal(withdrawal);
             totalWithdrawals += withdrawal;
+            account.addMonthlyRate();
         }
+        totalInterest = account.balance() + totalWithdrawals - totalDeposits - startingBalance;
+        System.out.println("After " + numberOfMonth + " months:");
+        System.out.println("Ending balance: " + account.balance());
+        System.out.println("Total amount of deposit: " + totalDeposits);
+        System.out.println("Total amount of withdrawal: " + totalWithdrawals);
+        System.out.println("Total interests earned: " + totalInterest);
     }
     
 }
 
 class SavingsAccount {
     private double annualInterestRate;
-    public double balance;
+    private double balance;
     public SavingsAccount(double startingBalance, double startingAnnualInterestRate) {
         balance = startingBalance;
         annualInterestRate = startingAnnualInterestRate;
@@ -80,5 +87,9 @@ class SavingsAccount {
     public void addMonthlyRate()
     {
         balance += annualInterestRate / 12 * balance;
+    }
+    public double balance()
+    {
+        return balance;
     }
 }
