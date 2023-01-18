@@ -220,7 +220,7 @@ class TicTacToe {
             if(i%2 == order)
             {
                 this.playerTurn();
-                if(!victory)
+                if(!victory && i != 8)
                 {
                     JOptionPane.showMessageDialog(null, "Your move as been rcorded,\n"
                     + "now the computer will play.\n" +
