@@ -196,6 +196,22 @@ class TicTacToe {
         return false;
     }
     
+    private void newGame()
+    {
+        int newGame = JOptionPane.showConfirmDialog(null, "Scores :\n"
+                + "\t-You : " + scores[0] + "\n"
+                + "\t-Computer : " + scores[1] + "\n", "Want to play a new game ?", JOptionPane.YES_NO_OPTION);
+        if(newGame == 0)
+        {
+            for(int i = 0; i < 9; i++)
+            {
+                grid[i/3][i%3] = String.valueOf(i+1).charAt(0);
+            }
+            victory = false;
+            this.run();
+        }
+    }
+    
     public void run()
     {
         int order = (scores[0] + scores[1] + scores[2]) % 2;
@@ -238,5 +254,6 @@ class TicTacToe {
                 + "\t-You : " + scores[0] + "\n"
                 + "\t-Computer : " + scores[1] + "\n");
         }
+        this.newGame();
     }
 }
