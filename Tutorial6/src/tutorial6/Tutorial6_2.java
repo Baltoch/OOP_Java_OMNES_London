@@ -4,6 +4,8 @@
  */
 package tutorial6;
 
+import java.util.Scanner;
+
 /**
  *
  * @author balth
@@ -31,7 +33,15 @@ package tutorial6;
  * 
  */
 public class Tutorial6_2 {
-    
+    public static void main(String[] args)
+    {
+        Grade grade = new Grade();
+        grade.setStudentsNames();
+        grade.setStudentsGrades();
+        String[] studentsNames = grade.getStudentsNames();
+        for(int i = 1; i < studentsNames.length; i++) grade.showStudentGrades(i);
+        grade.showStudentGrades(studentsNames[0]);
+    }
 }
 
 class Grade {
@@ -61,7 +71,7 @@ class Grade {
                 this.studentsGrades[i][j] = studentsGrades[i][j];
             }
         }
-        for(int i = 0; i < this.studentsLetterGrade.length; i++) this.studentsLetterGrade[i] = studentsLetterGrade[i];
+        for(int i = 0; i < this.studentsLetterGrade.length; i++) this.studentsLetterGrade[i] = getLetterGrade(i);
     }
     
     public Grade(String[] studentsNames, char[] studentsLetterGrade, int[][] studentsGrades)
@@ -76,15 +86,92 @@ class Grade {
             }
         }
     }
+
+    public String[] getStudentsNames() {
+        return studentsNames;
+    }
+
+    public void setStudentsNames(String[] studentsNames) {
+        this.studentsNames = studentsNames;
+    }
+    
+    public void setStudentsNames()
+    {
+        Scanner input = new Scanner(System.in);
+        for(int i = 0; i < studentsNames.length; i++)
+        {
+            System.out.println("Enter student " + i + " name:");
+            studentsNames[i] = input.next();
+        }
+    }
+
+    public char[] getStudentsLetterGrade() {
+        return studentsLetterGrade;
+    }
+
+    public void setStudentsLetterGrade(char[] studentsLetterGrade) {
+        this.studentsLetterGrade = studentsLetterGrade;
+    }
+
+    public int[][] getStudentsGrades() {
+        return studentsGrades;
+    }
+
+    public void setStudentsGrades(int[][] studentsGrades) {
+        this.studentsGrades = studentsGrades;
+        for(int i = 0; i < studentsLetterGrade.length; i++) studentsLetterGrade[i] = getLetterGrade(i);
+    }
+    
+    public void setStudentsGrades()
+    {
+        Scanner input = new Scanner(System.in);
+        for(int i = 0; i < studentsGrades.length; i++)
+        {
+            for(int j = 0; j < studentsGrades[i].length; j++)
+            {
+                System.out.println("Enter student " + i + " grade for exam " + (j+1));
+                studentsGrades[i][j] = input.nextInt();
+            }
+        }
+        for(int i = 0; i < studentsLetterGrade.length; i++) studentsLetterGrade[i] = getLetterGrade(i);
+    }
+    
+    public int getAverageGrade(int i)
+    {
+        int averageGrade = 0;
+        for(int j = 0; j < studentsGrades[i].length; j++) averageGrade += studentsGrades[i][j];
+        averageGrade /= studentsGrades[i].length;
+        return averageGrade;
+    }
     
     public char getLetterGrade(int i)
     {
-        char letterGrade;
-        int averageGrade;
-       
-        return letterGrade;
+        int averageGrade = getAverageGrade(i);
+        if(averageGrade < 60) return 'F';
+        else if(averageGrade < 70) return 'D';
+        else if(averageGrade < 80) return 'C';
+        else if(averageGrade < 90) return 'B';
+        else return 'A';
     }
     
+    public void showStudentGrades(int i)
+    {
+        System.out.println(studentsNames[i] + " got: ");
+        for(int j = 0; j < studentsGrades[i].length; j++) System.out.println(studentsGrades[i][j] + "/100 at exam " + (j+1));
+        System.out.println("Which gives an average of " + getAverageGrade(i) + "/100");
+        System.out.println(studentsNames[i] + " managed to score a " + studentsLetterGrade[i] + " for this module");
+        System.out.println();
+    }
     
-       
+    public void showStudentGrades(String name)
+    {
+        for(int i = 0; i < studentsNames.length; i++)
+        {
+            if(studentsNames[i].equalsIgnoreCase(name))
+            {
+                showStudentGrades(i);
+                break;
+            }
+        }
+    }   
 }
