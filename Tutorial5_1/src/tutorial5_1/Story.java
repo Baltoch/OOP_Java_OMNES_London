@@ -19,7 +19,7 @@ package tutorial5_1;
 public abstract class Story {
     protected String storyTitle;
     protected int numberOfPages;
-    protected String message;
+    protected String message = "";
     protected final int MAX_PAGES_NOVELLA = 100;
     protected final int MAX_PAGES_SHORT_STORY = 50;
 
