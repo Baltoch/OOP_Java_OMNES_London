@@ -34,11 +34,13 @@ public abstract class Loan implements LoanConstants {
         else this.term = SHORT_TERM_VALUE;
     }
     
-    public void toString()
+    @Override
+    public String toString()
     {
-        
+        return "Loan number " + loanNumber + " :\n"
+                + "Name of the customer: " + customerLastName + "\n"
+                + "Amount of the loan : " + amountOfLoan + "\n"
+                + "Interest rate : " + (interestRate * 100) + "%" + "\n"
+                + "Term: " + term + "\n";
     }
-    
-    
-    
 }
