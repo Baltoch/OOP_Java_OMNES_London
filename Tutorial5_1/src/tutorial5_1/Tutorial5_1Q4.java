@@ -32,7 +32,26 @@ package tutorial5_1;
  * computeDiscount for each of its two private discount policies. The two discount policies are described in (b) and (c). 
  */
 public class Tutorial5_1Q4 {
-    
+    public static void main(String[] args)
+    {
+        final int NUMBER_OF_POLICIES = 3;
+        DiscountPolicy[] policies = new DiscountPolicy[NUMBER_OF_POLICIES];
+        
+        // Instance of BulkDiscount
+        policies[0] = new BulkDiscount(5, 50);
+        
+        // Instance of BuyNItemsGetOneFree
+        policies[1] = new BuyNItemsGetOneFree(3);
+        
+        // Instance of CombinedDiscount
+        policies[2] = new CombinedDiscount(policies[0], policies[1]);
+        
+        for(int i = 0; i < NUMBER_OF_POLICIES; i++)
+        {
+            System.out.println(policies[i].computeDiscount(500, 10));
+        }
+        
+    }
 }
 
 abstract class DiscountPolicy {
@@ -67,7 +86,7 @@ class BuyNItemsGetOneFree extends DiscountPolicy {
     @Override
     public double computeDiscount(int count, double itemCost)
     {
-        return count % n * itemCost;
+        return count / n * itemCost;
     }
 }
 
